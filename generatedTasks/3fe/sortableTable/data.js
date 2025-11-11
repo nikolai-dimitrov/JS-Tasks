@@ -1,0 +1,98 @@
+export let d = [
+	{
+		id: 1,
+		name: "Name 1",
+		email: "Email1@gmail.com",
+		role: "Employee",
+	},
+	{
+		id: 2,
+		name: "Name 2",
+		email: "Email2@gmail.com",
+		role: "Employee",
+	},
+	{
+		id: 3,
+		name: "Name 3",
+		email: "Email3@gmail.com",
+		role: "Employee",
+	},
+	{
+		id: 4,
+		name: "Name 4",
+		email: "Email4@gmail.com",
+		role: "Employee",
+	},
+	{
+		id: 5,
+		name: "Name 5",
+		email: "Email5@gmail.com",
+		role: "Employee",
+	},
+	{
+		id: 6,
+		name: "Name 6",
+		email: "Email6@gmail.com",
+		role: "Employee",
+	},
+	{
+		id: 66,
+		name: "Name 66",
+		email: "Email66@gmail.com",
+		role: "Employee",
+	},
+	{
+		id: 16,
+		name: "Name 16",
+		email: "Email16@gmail.com",
+		role: "Employee",
+	},
+	{
+		id: 666,
+		name: "Name 666",
+		email: "Email666@gmail.com",
+		role: "Employee",
+	},
+    {
+		id: 6666,
+		name: "Name 6666",
+		email: "Email6666@gmail.com",
+		role: "Employee",
+	},
+    {
+		id: 67,
+		name: "Name 67",
+		email: "Email67@gmail.com",
+		role: "Employee",
+	},
+	{
+		id: 7,
+		name: "Name 7",
+		email: "Email7@gmail.com",
+		role: "Director",
+	},
+	{
+		id: 8,
+		name: "Name 8",
+		email: "Email8@gmail.com",
+		role: "Intern",
+	},
+	{
+		id: 9,
+		name: "Name 9",
+		email: "Email9@gmail.com",
+		role: "Intern",
+	},
+	{
+		id: 10,
+		name: "Name 10",
+		email: "Email10@gmail.com",
+		role: "Manager",
+	},
+	{
+		id: 11,
+		name: "Name 11",
+		email: "Email11@gmail.com",
+		role: "Manager",
+	},
+];
