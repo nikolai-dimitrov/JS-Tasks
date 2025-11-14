@@ -72,7 +72,7 @@ const checkTodoHandler = (e, id) => {
 	todo.checked
 		? todoTextParagraph.classList.add("lineThrough")
 		: todoTextParagraph.classList.remove("lineThrough");
-
+	// filterTodosHandler(e);
 	updateLocalStorage(data);
 };
 
@@ -87,15 +87,15 @@ const filterTodosHandler = (e) => {
 			}
 			return true;
 		});
-
+		// console.log(filteredTodos, "filtered");
 		loadTodos(filteredTodos);
 	}
-
 };
 
-const loadTodos = (data = data) => {
+const loadTodos = (data = data, initialLoad = false) => {
+	// console.log(data, "data");
 	todoList.innerHTML = "";
-	if (data.length == 0) {
+	if (data.length == 0 && initialLoad) {
 		const todoes = localStorage.getItem("todoes");
 		if (todoes) {
 			data.push(...JSON.parse(todoes));
@@ -110,4 +110,4 @@ const loadTodos = (data = data) => {
 addButton.addEventListener("click", addTodoHandler);
 radioBtnsContainer.addEventListener("change", filterTodosHandler);
 
-loadTodos(data);
+loadTodos(data, true);
