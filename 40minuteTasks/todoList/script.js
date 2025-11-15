@@ -65,6 +65,7 @@ const addTodoHandler = () => {
 
 	updateLocalStorage();
 	renderTodo(todoValues);
+	// filterTodosHandler();
 
 	createTodoInput.value = "";
 };
@@ -110,8 +111,11 @@ const filterTodosHandler = () => {
 		}
 	});
 
-	const filteredTodos = filterTodos(filterBy, data);
+	if (filterBy == "all") {
+		loadTodos(data)
+	}
 
+	const filteredTodos = filterTodos(filterBy, data);
 	loadTodos(filteredTodos);
 };
 
