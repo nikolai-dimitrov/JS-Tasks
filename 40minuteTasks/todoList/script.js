@@ -41,12 +41,18 @@ const deleteTodoHandler = (e, id) => {
 
 const addTodoHandler = () => {
 	let todoText = createTodoInput.value;
+	const isTodoExists = data.find((el) => el.text == todoText);
 
 	if (todoText.length == 0) {
 		todoText = prompt("Add todo title please");
 		if (todoText.length == 0) {
 			return;
 		}
+	}
+
+	if (isTodoExists) {
+		alert(`There is already existing todo with this title: ${todoText}`);
+		return;
 	}
 
 	const todoValues = {
