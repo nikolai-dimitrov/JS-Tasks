@@ -72,28 +72,44 @@ const checkTodoHandler = (e, id) => {
 	todo.checked
 		? todoTextParagraph.classList.add("lineThrough")
 		: todoTextParagraph.classList.remove("lineThrough");
-	// filterTodosHandler(e);
+
+	filterTodosHandler(e, id);
 	updateLocalStorage(data);
 };
 
-const filterTodosHandler = (e) => {
-	if (e.target.tagName == "INPUT") {
-		const filteredTodos = data.filter((todo) => {
-			if (e.target.id == "checked") {
-				return todo.checked;
-			}
-			if (e.target.id == "unchecked") {
-				return todo.checked == false;
-			}
-			return true;
-		});
-		// console.log(filteredTodos, "filtered");
-		loadTodos(filteredTodos);
-	}
+const filterTodos = (filterBy, todos, id) => {
+	let filteredTodos = todos.filter((todo) => {
+		if (filterBy == "checked") {
+			return id
+				? todo.id != id && todo.checked == true
+				: todo.checked == true;
+		}
+		if (filterBy == "unchecked") {
+			return id
+				? todo.id != id && todo.checked == false
+				: todo.checked == false;
+		}
+		return true;
+	});
+
+	return filteredTodos;
+};
+
+const filterTodosHandler = () => {
+	let filterBy = null;
+
+	document.querySelectorAll(".radioBtnsContainer input").forEach((el) => {
+		if (el.checked == true) {
+			filterBy = el.id;
+		}
+	});
+
+	const filteredTodos = filterTodos(filterBy, data);
+
+	loadTodos(filteredTodos);
 };
 
 const loadTodos = (data = data, initialLoad = false) => {
-	// console.log(data, "data");
 	todoList.innerHTML = "";
 	if (data.length == 0 && initialLoad) {
 		const todoes = localStorage.getItem("todoes");
