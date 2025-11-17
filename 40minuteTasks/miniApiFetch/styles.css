@@ -1,0 +1,8 @@
+ul {
+	list-style-type: none;
+}
+
+li {
+    background-color:azure;
+    width: 15%;
+}
