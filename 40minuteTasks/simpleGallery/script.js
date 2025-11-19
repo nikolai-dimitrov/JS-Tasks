@@ -6,6 +6,10 @@ const closeModalButton = document.querySelector(".modal > button");
 const modalButtonsContainer = document.querySelector(
 	".modal .buttonsContainer"
 );
+let openedImage = {
+	index: null,
+	id: null,
+};
 
 const updateNavigationButtons = () => {
 	const currentImage = document.querySelector(".modalContent img");
@@ -16,12 +20,18 @@ const updateNavigationButtons = () => {
 		console.log("disable previous");
 	}
 };
+
 const showImageModalHandler = (e) => {
 	if (e.target.tagName == "IMG") {
 		modalElement.classList.remove("hidden");
 
 		modalImage.src = e.target.src;
 		modalImage.id = e.target.id;
+
+		if (openedImage.id != e.target.id) {
+            openedImage.id = e.target.id;
+			openedImage.index = data.findIndex((el) => el.id == e.target.id);
+		}
 
 		updateNavigationButtons();
 	}
@@ -30,16 +40,14 @@ const showImageModalHandler = (e) => {
 const changeImageHandler = (e) => {
 	if (e.target.tagName == "BUTTON") {
 		const currentImage = document.querySelector(".modalContent img");
-		let imageIndex = data.findIndex((el) => el.id == currentImage.id);
-
 		if (currentImage.id < data.length && e.target.textContent == "Next") {
-			imageIndex += 1;
+			openedImage.index += 1;
 		} else if (currentImage.id > 1 && e.target.textContent == "Previous") {
-			imageIndex -= 1;
+			openedImage.index -= 1;
 		}
 
-		currentImage.src = data[imageIndex].imageUrl;
-		currentImage.id = data[imageIndex].id;
+		currentImage.src = data[openedImage["index"]].imageUrl;
+		currentImage.id = data[openedImage["index"]].id;
 	}
 };
 
