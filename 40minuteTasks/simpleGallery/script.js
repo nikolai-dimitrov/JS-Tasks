@@ -2,23 +2,24 @@ import { data } from "./data.js";
 const imagesContainer = document.querySelector("ul");
 const modalElement = document.querySelector(".modal");
 const modalImage = document.querySelector(".modal img");
+const overlayElement = document.querySelector(".overlay");
 const closeModalButton = document.querySelector(".modal > button");
 const modalButtonsContainer = document.querySelector(
 	".modal .buttonsContainer"
 );
+const previousButton = document.querySelector(
+	".buttonsContainer button:nth-child(1)"
+);
+const nextButton = document.querySelector(
+	".buttonsContainer button:nth-child(2)"
+);
+
 let openedImage = {
 	index: null,
 	id: null,
 };
 
 const updateNavigationButtons = (imageIndex) => {
-	const previousButton = document.querySelector(
-		".buttonsContainer button:nth-child(1)"
-	);
-	const nextButton = document.querySelector(
-		".buttonsContainer button:nth-child(2)"
-	);
-
 	previousButton.disabled = false;
 	nextButton.disabled = false;
 
@@ -35,6 +36,7 @@ const updateNavigationButtons = (imageIndex) => {
 const showImageModalHandler = (e) => {
 	if (e.target.tagName == "IMG") {
 		modalElement.classList.remove("hidden");
+		overlayElement.classList.remove("hidden");
 
 		modalImage.src = e.target.src;
 		modalImage.id = e.target.id;
@@ -68,6 +70,12 @@ const createImageElement = (image) => {
 	const imageElement = document.createElement("img");
 	imageElement.src = image.imageUrl;
 	imageElement.id = image.id;
+	imageElement.classList.add("loading");
+
+	imageElement.addEventListener("load", (e) => {
+		imageElement.classList.remove("loading");
+	});
+
 	const imageWrapperElement = document.createElement("li");
 	imageWrapperElement.appendChild(imageElement);
 
@@ -80,9 +88,17 @@ const loadImages = () => {
 	});
 };
 
-closeModalButton.addEventListener("click", () => {
-	modalElement.classList.add("hidden");
-});
+const closeModalHandler = (e) => {
+	if ((e.type == "keydown" && e.key == "Escape") || e.type == "click") {
+		modalElement.classList.add("hidden");
+		overlayElement.classList.add("hidden");
+	}
+};
+
+closeModalButton.addEventListener("click", closeModalHandler);
+overlayElement.addEventListener("click", closeModalHandler);
+window.addEventListener("keydown", closeModalHandler);
+
 modalButtonsContainer.addEventListener("click", changeImageHandler);
 imagesContainer.addEventListener("click", showImageModalHandler);
 
