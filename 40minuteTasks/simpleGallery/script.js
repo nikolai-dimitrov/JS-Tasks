@@ -11,13 +11,24 @@ let openedImage = {
 	id: null,
 };
 
-const updateNavigationButtons = () => {
-	const currentImage = document.querySelector(".modalContent img");
-	const imageIndex = data.findIndex((el) => el.id == currentImage.id);
-	if (imageIndex == data.length - 1) {
-		console.log("disable next");
+const updateNavigationButtons = (imageIndex) => {
+	const previousButton = document.querySelector(
+		".buttonsContainer button:nth-child(1)"
+	);
+	const nextButton = document.querySelector(
+		".buttonsContainer button:nth-child(2)"
+	);
+
+	previousButton.disabled = false;
+	nextButton.disabled = false;
+
+	if (data.length - 1 == 0) {
+		previousButton.disabled = true;
+		nextButton.disabled = true;
 	} else if (imageIndex == 0) {
-		console.log("disable previous");
+		previousButton.disabled = true;
+	} else if (imageIndex == data.length - 1) {
+		nextButton.disabled = true;
 	}
 };
 
@@ -29,11 +40,11 @@ const showImageModalHandler = (e) => {
 		modalImage.id = e.target.id;
 
 		if (openedImage.id != e.target.id) {
-            openedImage.id = e.target.id;
+			openedImage.id = e.target.id;
 			openedImage.index = data.findIndex((el) => el.id == e.target.id);
 		}
 
-		updateNavigationButtons();
+		updateNavigationButtons(openedImage.index);
 	}
 };
 
@@ -48,6 +59,8 @@ const changeImageHandler = (e) => {
 
 		currentImage.src = data[openedImage["index"]].imageUrl;
 		currentImage.id = data[openedImage["index"]].id;
+
+		updateNavigationButtons(openedImage.index);
 	}
 };
 
