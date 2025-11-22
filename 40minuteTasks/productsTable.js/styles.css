@@ -1,3 +1,27 @@
+section {
+	width: 220px;
+    margin: 30px auto 30px auto;
+}
+
+section div {
+	display: flex;
+}
+
+section > div {
+	gap: 20px;
+	justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+section div div {
+	flex-direction: column;
+}
+
+input {
+	width: 96%;
+    margin-bottom: 10px;
+}
+
 thead {
 	background-color: cadetblue;
 }
