@@ -19,7 +19,7 @@ const dfs = (node, currentSum, path, result, t) => {
 
 		return;
 	}
-
+	
 	dfs(node.left, newSum, newPath, result, t);
 	dfs(node.right, newSum, newPath, result, t);
 };
