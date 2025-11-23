@@ -105,8 +105,18 @@ const filterSelectChangeHandler = (e) => {
 
 const searchInputKeyupHandler = (e) => {
 	searchQuery = e.target.value;
-	renderProducts(data);
+	debouncedRenderProducts(data);
 };
+
+const debounce = (fn, delay) => {
+	let timeoutId = null;
+	return function (...args) {
+		clearTimeout(timeoutId);
+		timeoutId = setTimeout(() => fn(...args), delay);
+	};
+};
+
+const debouncedRenderProducts = debounce(renderProducts, 300);
 
 sortSelectElement.addEventListener("change", sortSelectChangeHandler);
 filterSelectElement.addEventListener("change", filterSelectChangeHandler);
