@@ -1,5 +1,8 @@
 const slidingWindow = (arr, k) => {
-	let currentSum = arr[0] + arr[1];
+	let currentSum = arr
+		.slice(0, k)
+		.reduce((prevVal, currentVal) => (prevVal += currentVal), 0);
+
 	let max = currentSum;
 
 	for (let i = k; i < arr.length; i++) {
